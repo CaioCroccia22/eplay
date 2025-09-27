@@ -9,6 +9,7 @@ import { GlobalCss } from './styles'
 import Header from './components/Header'
 import Home from './pages/Home'
 import Categorys from './pages/Categorys'
+import Products from './pages/Products'
 import Footer from './components/Footer'
 
 const rotas = createBrowserRouter([
@@ -17,7 +18,7 @@ const rotas = createBrowserRouter([
     element: <Home />
   },
   {
-    path: '/categorias',
+    path: '/categorys',
     element: <Categorys />
   }
 ])
@@ -25,7 +26,8 @@ const rotas = createBrowserRouter([
 const Rotas = () => (
   <Routes>
     <Route path="/" element={<Home />} />
-    <Route path="/categorias" element={<Categorys />} />
+    <Route path="/categorys" element={<Categorys />} />
+    <Route path="/products" element={<Products />} />
   </Routes>
 )
 
@@ -37,7 +39,7 @@ function App() {
         <Header />
       </div>
       <Rotas />
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   )
 }

@@ -24,7 +24,8 @@ const Banner = () => (
             </Precos>
           </ContainerTitle>
           <Button
-            type="button"
+            variant="primary"
+            type="link"
             title="Clique aqui para aproveitar"
             to="/produto"
           >

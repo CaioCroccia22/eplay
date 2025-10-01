@@ -39,7 +39,7 @@ function App() {
         <Header />
       </div>
       <Rotas />
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   )
 }

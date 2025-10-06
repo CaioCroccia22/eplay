@@ -1,31 +1,42 @@
 import styled from 'styled-components'
 import { TagContainer } from '../Tag/styles'
 
-export type Props = {
-  banner: string
-}
-
-export const Imagem = styled.div<Props>`
-  width: 100%;
+export const Imagem = styled.div`
+  width: 100vw;
   height: 75vh;
   display: block;
-  background-image: url(${(props) => props.banner});
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  object-fit: cover;
   font-weight: bold;
+  position: relative;
+  z-index: 2;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
 `
 
 export const ContainerBanner = styled.div`
   display: flex;
-  max-height: 80%;
   flex-direction: column;
+  position: relative;
   max-width: 100%;
-  gap: 10px;
+  justify-content: space-between;
+  height: 80%;
+  z-index: 2;
 
   ${TagContainer} {
-    max-width: 30%;
-    margin-bottom: 270px;
+    width: 25%;
+    border-radius: 8px;
   }
 `
 
@@ -35,7 +46,8 @@ export const ContainerInfos = styled.div`
   width: 100%;
 `
 export const ContainerTitle = styled.div`
-  width: 75%;
+  width: 60%;
+  margin-left: 150px;
 `
 
 export const Titulo = styled.h2`

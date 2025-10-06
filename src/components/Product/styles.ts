@@ -14,7 +14,14 @@ export const Card = styled.div<
   border-radius: 8px;
   position: relative;
   width: 222px;
-  // padding: 20px;
+  overflow: hidden;
+
+  img {
+    height: 250px;
+    width: 222px;
+    object-fit: cover;
+    display: block;
+  }
 
   ${TagContainer} {
     margin-right: 8px;
@@ -45,9 +52,7 @@ export const Infos = styled.div`
   align-self: center;
   justify-self: center;
   top: 0px;
-  // right: 0px;
-  margin-left: 43px;
-  // max-width: 60%;
+
+  right: 0px;
   z-index: 10;
-  border-radius: 5px;
 `

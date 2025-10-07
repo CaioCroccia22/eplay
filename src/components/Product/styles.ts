@@ -2,19 +2,17 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 import { Props } from '.'
+import { Link } from 'react-router'
 
-export const Card = styled.div<
-  Omit<
-    Props,
-    'title' | 'image' | 'infos' | 'description' | 'system' | 'category'
-  >
->`
-  background-color: ${(props) =>
-    props.background === 'black' ? cores.cinza : cores.preta};
+export const Card = styled(Link)`
+  background-color: ${cores.cinza};
   border-radius: 8px;
   position: relative;
   width: 222px;
   overflow: hidden;
+  text-decoration: none;
+  color: ${cores.branca};
+  display: block;
 
   img {
     height: 250px;

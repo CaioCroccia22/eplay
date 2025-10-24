@@ -122,13 +122,13 @@ const Home = () => {
   const [emBreve, setEmBreve] = useState<Game[]>([])
 
   useEffect(() => {
-    fetch('https://ebac-fake-api.vercel.app/api/eplay/promocoes')
+    fetch('https://api-ebac.vercel.app/api/eplay/promocoes')
       .then((response) => response.json())
       .then((response) => setPromocoes(response))
   }, [])
 
   useEffect(() => {
-    fetch('https://ebac-fake-api.vercel.app/api/eplay/em-breve')
+    fetch('https://api-ebac.vercel.app/api/eplay/em-breve')
       .then((response) => response.json())
       .then((response) => setEmBreve(response))
   })

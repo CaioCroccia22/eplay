@@ -13,13 +13,13 @@ const Product = () => {
   const [game, setGame] = useState<Game>()
 
   useEffect(() => {
-    fetch(`https://fake-api-tau.vercel.app/api/eplay/jogos/${id}`)
+    fetch(`https://ebac-fake-api.vercel.app/api/eplay/jogos/${id}`)
       .then((res) => res.json())
       .then((res) => setGame(res))
   }, [id])
 
   if (!game) {
-    return <h3>Carregando...</h3>
+    return <h3>Carregando produto...</h3>
   }
 
   return (

@@ -92,25 +92,25 @@ const Categorys = () => {
   const [rpg, setRpg] = useState<Game[]>([])
 
   useEffect(() => {
-    fetch('https://ebac-fake-api.vercel.app/api/eplay/acao')
+    fetch('https://api-ebac.vercel.app/api/eplay/acao')
       .then((response) => response.json())
       .then((response) => setAcoes(response))
   }, [])
 
   useEffect(() => {
-    fetch('https://ebac-fake-api.vercel.app/api/eplay/esportes')
+    fetch('https://api-ebac.vercel.app/api/eplay/esportes')
       .then((response) => response.json())
       .then((response) => setEsportes(response))
   })
 
   useEffect(() => {
-    fetch('https://ebac-fake-api.vercel.app/api/eplay/luta')
+    fetch('https://api-ebac.vercel.app/api/eplay/luta')
       .then((response) => response.json())
       .then((response) => setLuta(response))
   })
 
   useEffect(() => {
-    fetch('https://ebac-fake-api.vercel.app/api/eplay/rpg')
+    fetch('https://api-ebac.vercel.app/api/eplay/rpg')
       .then((response) => response.json())
       .then((response) => setRpg(response))
   })

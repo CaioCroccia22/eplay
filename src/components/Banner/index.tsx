@@ -13,15 +13,10 @@ import {
   ContainerTitle
 } from './styles'
 import { useParams } from 'react-router'
+import { useGetFeaturedGameQuery } from '../../services/Api'
 
 const Banner = () => {
-  const [game, setGame] = useState<Game>()
-
-  useEffect(() => {
-    fetch(`https://api-ebac.vercel.app/api/eplay/destaque`)
-      .then((res) => res.json())
-      .then((res) => setGame(res))
-  }, [])
+  const { data: game, isLoading } = useGetFeaturedGameQuery()
 
   if (!game) {
     return <h3>Carregando...</h3>

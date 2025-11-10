@@ -7,30 +7,32 @@ import Gallery from '../../components/Gallery'
 import ResidentEvil from '../../assets/images/resident.png'
 import { useEffect, useState } from 'react'
 import { Game } from '../Home'
+import { useGetGameQuery } from '../../services/Api'
 
-const Product = () => {
-  const { id } = useParams()
-  const [game, setGame] = useState<Game>()
+const Products = () => {
+  const { productId } = useParams()
+  const { data: game, isError, isLoading } = useGetGameQuery(productId!)
+  console.log(productId)
+  console.log(typeof productId)
 
-  useEffect(() => {
-    fetch(`https://ebac-fake-api.vercel.app/api/eplay/jogos/${id}`)
-      .then((res) => res.json())
-      .then((res) => setGame(res))
-  }, [id])
-
-  if (!game) {
+  if (game === undefined) {
     return <h3>Carregando produto...</h3>
+  }
+
+  if (isError) {
+    return <h3>Esta com erro....</h3>
   }
 
   return (
     <>
       <Hero game={game} />
       <Section title="Sobre o Jogo" background="black">
-        <p>${game.description}</p>
+        <p>{game.description}</p>
       </Section>
       <Section title="Mais detalhes" background="gray">
         <p>
-          <b>Plataforma: </b>${game.details.developer}
+          <b>Plataforma: </b>
+          {game.details.system}
           <br />
           <b>Desenvolvedor:</b> {game.details.developer} <br />
           <b>Editora:</b> {game.details.publishe} <br />
@@ -47,4 +49,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default Products

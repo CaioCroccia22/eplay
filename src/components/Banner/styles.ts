@@ -11,7 +11,7 @@ export const Imagem = styled.div`
   object-fit: cover;
   font-weight: bold;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 
   &::after {
     content: '';
@@ -21,7 +21,7 @@ export const Imagem = styled.div`
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1;
+    z-index: 0;
   }
 `
 
@@ -32,7 +32,7 @@ export const ContainerBanner = styled.div`
   max-width: 100%;
   justify-content: space-between;
   height: 80%;
-  z-index: 2;
+  z-index: 1;
 
   ${TagContainer} {
     width: 25%;

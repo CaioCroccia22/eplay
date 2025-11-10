@@ -13,6 +13,9 @@ import Categorys from './pages/Categorys'
 import Products from './pages/Products'
 import Footer from './components/Footer'
 import { store } from './store'
+import Cart from './components/Cart/Index'
+
+// import Products from './components/Product'
 
 const rotas = createBrowserRouter([
   {
@@ -47,6 +50,7 @@ function App() {
         </div>
         <Rotas />
         <Footer />
+        <Cart />
       </BrowserRouter>
     </Provider>
   )

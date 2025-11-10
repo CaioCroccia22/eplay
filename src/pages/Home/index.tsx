@@ -6,6 +6,7 @@ import zelda from '../../assets/images/zelda.png'
 import starWars from '../../assets/images/star_wars.png'
 import diablo from '../../assets/images/diablo.png'
 import { useEffect, useState } from 'react'
+import { useGetOnSaleQuery, useGetSoonQuery } from '../../services/Api'
 
 // type Game = []
 // Conteudo estático para teste
@@ -118,28 +119,20 @@ export type Game = {
 }
 
 const Home = () => {
-  const [promocoes, setPromocoes] = useState<Game[]>([])
-  const [emBreve, setEmBreve] = useState<Game[]>([])
+  const { data: onSale } = useGetOnSaleQuery()
+  const { data: soon } = useGetSoonQuery()
 
-  useEffect(() => {
-    fetch('https://api-ebac.vercel.app/api/eplay/promocoes')
-      .then((response) => response.json())
-      .then((response) => setPromocoes(response))
-  }, [])
-
-  useEffect(() => {
-    fetch('https://api-ebac.vercel.app/api/eplay/em-breve')
-      .then((response) => response.json())
-      .then((response) => setEmBreve(response))
-  })
-
-  return (
-    <>
-      <Banner />
-      <ProductsList games={promocoes} title="Promocoes" background="gray" />
-      <ProductsList games={emBreve} title="Em Breve" background="black" />
-    </>
-  )
+  if (onSale && soon) {
+    return (
+      <>
+        <Banner />
+        <ProductsList games={onSale} title="Promocoes" background="gray" />
+        <ProductsList games={soon} title="Em Breve" background="black" />
+      </>
+    )
+  } else {
+    return <h4>Carregando</h4>
+  }
 }
 
 export default Home

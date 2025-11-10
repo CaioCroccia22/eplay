@@ -6,6 +6,13 @@ import zelda from '../../assets/images/zelda.png'
 import starWars from '../../assets/images/star_wars.png'
 import diablo from '../../assets/images/diablo.png'
 import { useEffect, useState } from 'react'
+import {
+  useGetActionGamesQuery,
+  useGetFightGameQuery,
+  useGetRpgGameQuery,
+  useGetSimulationGameQuery,
+  useGetSportGamesQuery
+} from '../../services/Api'
 
 // const promocoes: Game[] = [
 //   {
@@ -86,43 +93,29 @@ import { useEffect, useState } from 'react'
 // ]
 
 const Categorys = () => {
-  const [acao, setAcoes] = useState<Game[]>([])
-  const [esportes, setEsportes] = useState<Game[]>([])
-  const [luta, setLuta] = useState<Game[]>([])
-  const [rpg, setRpg] = useState<Game[]>([])
+  const { data: actionGames } = useGetActionGamesQuery()
+  const { data: fightGames } = useGetFightGameQuery()
+  const { data: rpgGames } = useGetRpgGameQuery()
+  const { data: simulationGames } = useGetSimulationGameQuery()
+  const { data: sportsGames } = useGetSportGamesQuery()
 
-  useEffect(() => {
-    fetch('https://api-ebac.vercel.app/api/eplay/acao')
-      .then((response) => response.json())
-      .then((response) => setAcoes(response))
-  }, [])
-
-  useEffect(() => {
-    fetch('https://api-ebac.vercel.app/api/eplay/esportes')
-      .then((response) => response.json())
-      .then((response) => setEsportes(response))
-  })
-
-  useEffect(() => {
-    fetch('https://api-ebac.vercel.app/api/eplay/luta')
-      .then((response) => response.json())
-      .then((response) => setLuta(response))
-  })
-
-  useEffect(() => {
-    fetch('https://api-ebac.vercel.app/api/eplay/rpg')
-      .then((response) => response.json())
-      .then((response) => setRpg(response))
-  })
-
-  return (
-    <>
-      <ProductsList games={rpg} title="RPG" background="gray" />
-      <ProductsList games={acao} title="Acao" background="black" />
-      <ProductsList games={luta} title="Luta" background="gray" />
-      <ProductsList games={esportes} title="esportes" background="black" />
-    </>
-  )
+  if (actionGames && fightGames && rpgGames && simulationGames && sportsGames) {
+    return (
+      <>
+        <ProductsList games={rpgGames} title="RPG" background="gray" />
+        <ProductsList games={actionGames} title="Acao" background="black" />
+        <ProductsList games={fightGames} title="Luta" background="gray" />
+        <ProductsList games={sportsGames} title="esportes" background="black" />
+        <ProductsList
+          games={simulationGames}
+          title="simulacao"
+          background="gray"
+        />
+      </>
+    )
+  } else {
+    return <h2>Carregando</h2>
+  }
 }
 
 export default Categorys

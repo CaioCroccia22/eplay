@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Game } from '../../pages/Home'
+import { Action } from '../../components/Gallery/styles'
 
 type CartState = {
   items: Game[]
+  isOpen: boolean
 }
 
 const initialState: CartState = {
-  items: []
+  items: [],
+  isOpen: false
 }
 
 const CartSlice = createSlice({
@@ -15,9 +18,12 @@ const CartSlice = createSlice({
   reducers: {
     add: (state, action: PayloadAction<Game>) => {
       state.items.push(action.payload)
+    },
+    toggle: (state, action: PayloadAction<boolean>) => {
+      state.isOpen = !action.payload
     }
   }
 })
 
-const { add } = CartSlice.actions
+export const { add, toggle } = CartSlice.actions
 export default CartSlice.reducer

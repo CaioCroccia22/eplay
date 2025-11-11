@@ -9,41 +9,52 @@ import {
   Quantity
 } from './styles'
 import Tag from '../Tag/Index'
+import { UseSelector } from 'react-redux'
 import { CartProduct } from '../Cart Product/Index'
+import { useSelector, UseDispatch } from 'react-redux'
+import { RootReducer } from '../../store'
 
-export const Cart = () => (
-  <CartContainer>
-    <Overlay />
-    <SideBar>
-      <ul>
-        <CartItem>
-          <img src={starWars} />
-          <div>
-            <h3>Nome do jogo</h3>
-            <Tag>RPG</Tag>
-            <Tag>PS5</Tag>
-          </div>
-          <button type="button" />
-        </CartItem>
-        <CartItem>
-          <img src={starWars} />
-          <div>
-            <h3>Nome do jogo</h3>
-            <Tag>RPG</Tag>
-            <Tag>PS5</Tag>
-          </div>
-          <button type="button" />
-        </CartItem>
-      </ul>
-      <Quantity>2 jogo(s) no carrinho</Quantity>
-      <Prices>
-        Total de R$ 250,00 <span>Em até 6x sem juros</span>
-      </Prices>
-      <Button variant="primary" type="button" title="Clique aqui para comprar">
-        Continuar com a compra
-      </Button>
-    </SideBar>
-  </CartContainer>
-)
+export const Cart = () => {
+  const Cart = useSelector((state: RootReducer) => state.cart.isOpen)
+
+  return (
+    <CartContainer className={Cart ? 'is-open' : ''}>
+      <Overlay />
+      <SideBar>
+        <ul>
+          <CartItem>
+            <img src={starWars} />
+            <div>
+              <h3>Nome do jogo</h3>
+              <Tag>RPG</Tag>
+              <Tag>PS5</Tag>
+            </div>
+            <button type="button" />
+          </CartItem>
+          <CartItem>
+            <img src={starWars} />
+            <div>
+              <h3>Nome do jogo</h3>
+              <Tag>RPG</Tag>
+              <Tag>PS5</Tag>
+            </div>
+            <button type="button" />
+          </CartItem>
+        </ul>
+        <Quantity>2 jogo(s) no carrinho</Quantity>
+        <Prices>
+          Total de R$ 250,00 <span>Em até 6x sem juros</span>
+        </Prices>
+        <Button
+          variant="primary"
+          type="button"
+          title="Clique aqui para comprar"
+        >
+          Continuar com a compra
+        </Button>
+      </SideBar>
+    </CartContainer>
+  )
+}
 
 export default Cart

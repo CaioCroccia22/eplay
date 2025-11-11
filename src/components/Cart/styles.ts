@@ -24,6 +24,11 @@ export const CartContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   z-index: 1;
+  display: none;
+
+  &.is-open {
+    display: flex;
+  }
 `
 export const SideBar = styled.aside`
   background-color: ${cores.cinza};

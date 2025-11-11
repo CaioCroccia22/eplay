@@ -32,7 +32,7 @@ export const LinkItem = styled.li`
   display: flex;
 `
 
-export const ListCart = styled.a`
+export const CartButton = styled.a`
   display: flex;
   img {
     margin-left: 16px;

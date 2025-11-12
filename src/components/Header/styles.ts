@@ -33,6 +33,7 @@ export const LinkItem = styled.li`
 `
 
 export const CartButton = styled.a`
+  cursor: pointer;
   display: flex;
   img {
     margin-left: 16px;

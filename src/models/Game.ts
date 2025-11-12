@@ -1,4 +1,4 @@
-class Game {
+class GameClass {
   id: number
   category: string
   description: string
@@ -26,4 +26,4 @@ class Game {
   }
 }
 
-export default Game
+export default GameClass

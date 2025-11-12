@@ -9,17 +9,13 @@ import {
   Quantity
 } from './styles'
 import Tag from '../Tag/Index'
-import { UseSelector } from 'react-redux'
-import { CartProduct } from '../Cart Product/Index'
-import { useSelector, UseDispatch } from 'react-redux'
-import { RootReducer } from '../../store'
+import { useCart } from '../../store/hooks/useCart'
 
 export const Cart = () => {
-  const Cart = useSelector((state: RootReducer) => state.cart.isOpen)
-
+  const { ToggleCart } = useCart()
   return (
-    <CartContainer className={Cart ? 'is-open' : ''}>
-      <Overlay />
+    <CartContainer className={useCart().CartState ? 'is-open' : ''}>
+      <Overlay onClick={ToggleCart} />
       <SideBar>
         <ul>
           <CartItem>

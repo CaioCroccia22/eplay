@@ -1,19 +1,13 @@
 import { Link } from 'react-router-dom'
 
 import { HeaderBar, Links, LinkItem, CartButton } from './styles'
-import { toggle } from '../../store/reducer/cart'
 
 import logo from '../../assets/images/logo.svg'
 import carrinho from '../../assets/images/carrinho.svg'
-
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
+import { useCart } from '../../store/hooks/useCart'
 
 export const Header = () => {
-  // Isolar essa lógica aqui - amanhã
-  const CartState = useSelector((state: RootReducer) => state.cart.isOpen)
-  const dispatch = useDispatch()
+  const { ToggleCart, Items } = useCart()
   return (
     <HeaderBar>
       <div>
@@ -34,8 +28,8 @@ export const Header = () => {
           </Links>
         </nav>
       </div>
-      <CartButton onClick={() => dispatch(toggle(CartState))}>
-        0 - Produto(s)
+      <CartButton onClick={ToggleCart}>
+        {Items.length} - Produto(s)
         <img src={carrinho} alt="carrinho" />
       </CartButton>
     </HeaderBar>

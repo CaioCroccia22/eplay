@@ -1,5 +1,5 @@
 import ProductsList from '../../components/ProductsList'
-import { Game } from '../../pages/Home'
+import { Game } from '../Home'
 
 import resident from '../../assets/images/resident.png'
 import zelda from '../../assets/images/zelda.png'
@@ -92,7 +92,7 @@ import {
 //   }
 // ]
 
-const Categorys = () => {
+const Categories = () => {
   const { data: actionGames } = useGetActionGamesQuery()
   const { data: fightGames } = useGetFightGameQuery()
   const { data: rpgGames } = useGetRpgGameQuery()
@@ -102,14 +102,30 @@ const Categorys = () => {
   if (actionGames && fightGames && rpgGames && simulationGames && sportsGames) {
     return (
       <>
-        <ProductsList games={rpgGames} title="RPG" background="gray" />
-        <ProductsList games={actionGames} title="Acao" background="black" />
-        <ProductsList games={fightGames} title="Luta" background="gray" />
-        <ProductsList games={sportsGames} title="esportes" background="black" />
+        <ProductsList games={rpgGames} title="RPG" background="gray" id="rpg" />
+        <ProductsList
+          games={actionGames}
+          title="Acao"
+          background="black"
+          id="action"
+        />
+        <ProductsList
+          games={fightGames}
+          title="Luta"
+          background="gray"
+          id="fight"
+        />
+        <ProductsList
+          games={sportsGames}
+          title="esportes"
+          background="black"
+          id="sports"
+        />
         <ProductsList
           games={simulationGames}
           title="simulacao"
           background="gray"
+          id="simulation"
         />
       </>
     )
@@ -118,4 +134,4 @@ const Categorys = () => {
   }
 }
 
-export default Categorys
+export default Categories

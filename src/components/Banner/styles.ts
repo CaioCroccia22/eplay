@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { TagContainer } from '../Tag/styles'
+import { breakpoint } from '../../styles'
 
 export const Imagem = styled.div`
   width: 100vw;
@@ -12,6 +13,12 @@ export const Imagem = styled.div`
   font-weight: bold;
   position: relative;
   z-index: 1;
+
+  @media (max-width: ${breakpoint.tablet}) {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 
   &::after {
     content: '';
@@ -37,6 +44,10 @@ export const ContainerBanner = styled.div`
   ${TagContainer} {
     width: 25%;
     border-radius: 8px;
+
+    @media (max-width: ${breakpoint.tablet}) {
+      width: 20%;
+    }
   }
 `
 

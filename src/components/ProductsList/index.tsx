@@ -7,6 +7,7 @@ export type Props = {
   title: string
   background: 'gray' | 'black'
   games: Game[]
+  id?: string
 }
 
 export const formataPreco = (preco = 0) => {
@@ -15,7 +16,7 @@ export const formataPreco = (preco = 0) => {
     currency: 'BRL'
   }).format(preco)
 }
-const ProductsList = ({ title, background, games }: Props) => {
+const ProductsList = ({ title, background, games, id }: Props) => {
   // O retorno é um string da NumberFormat
 
   // Preencher a props tags do product
@@ -40,7 +41,7 @@ const ProductsList = ({ title, background, games }: Props) => {
     return tags
   }
   return (
-    <Container background={background}>
+    <Container id={id} background={background}>
       <h2>{title}</h2>
       <List>
         {games.map((game) => (

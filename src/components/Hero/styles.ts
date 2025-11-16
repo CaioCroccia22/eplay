@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoint, cores } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 
 export const Banner = styled.div`

@@ -17,7 +17,7 @@ export const Header = () => {
         <nav>
           <Links>
             <LinkItem>
-              <Link to="/categorys">Categorias</Link>
+              <Link to="/categories">Categorias</Link>
             </LinkItem>
             <LinkItem>
               <a>Novidades</a>

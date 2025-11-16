@@ -126,8 +126,18 @@ const Home = () => {
     return (
       <>
         <Banner />
-        <ProductsList games={onSale} title="Promocoes" background="gray" />
-        <ProductsList games={soon} title="Em Breve" background="black" />
+        <ProductsList
+          id="on-sale"
+          games={onSale}
+          title="Promocoes"
+          background="gray"
+        />
+        <ProductsList
+          id="coming-soon"
+          games={soon}
+          title="Em Breve"
+          background="black"
+        />
       </>
     )
   } else {

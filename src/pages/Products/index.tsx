@@ -2,18 +2,12 @@ import { useParams } from 'react-router-dom'
 import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 
-import zelda from '../../assets/images/zelda.png'
 import Gallery from '../../components/Gallery'
-import ResidentEvil from '../../assets/images/resident.png'
-import { useEffect, useState } from 'react'
-import { Game } from '../Home'
 import { useGetGameQuery } from '../../services/Api'
 
 const Products = () => {
   const { productId } = useParams()
   const { data: game, isError, isLoading } = useGetGameQuery(productId!)
-  console.log(productId)
-  console.log(typeof productId)
 
   if (game === undefined) {
     return <h3>Carregando produto...</h3>

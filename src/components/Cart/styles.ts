@@ -24,10 +24,13 @@ export const CartContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   z-index: 1;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
 
   &.is-open {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
   }
 `
 export const SideBar = styled.aside`
@@ -103,5 +106,11 @@ export const CartItem = styled.li`
     position: absolute;
     top: 8px;
     right: 0;
+    cursor: pointer;
+    trasition: ease-in-out 3s transform;
+  }
+
+  button:hover {
+    transform: scale(1.15);
   }
 `

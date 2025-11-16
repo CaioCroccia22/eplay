@@ -5,7 +5,7 @@ import { Props } from '.'
 import { Link } from 'react-router'
 
 export const Card = styled(Link)`
-  background-color: ${cores.cinza};
+  background-color: ${cores.preta};
   border-radius: 8px;
   position: relative;
   width: 222px;
@@ -13,6 +13,8 @@ export const Card = styled(Link)`
   text-decoration: none;
   color: ${cores.branca};
   display: block;
+  box-shadow: 4px 4px 0.1px rgba(0, 0, 0, 0.5);
+  trasition: all 0.5s ease-in-out;
 
   img {
     height: 250px;
@@ -23,6 +25,11 @@ export const Card = styled(Link)`
 
   ${TagContainer} {
     margin-right: 8px;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+    border: none;
   }
 `
 

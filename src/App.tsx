@@ -14,6 +14,7 @@ import Products from './pages/Products'
 import Footer from './components/Footer'
 import { store } from './store'
 import Cart from './components/Cart/Index'
+import CheckOut from './pages/CheckOut'
 
 // import Products from './components/Product'
 
@@ -29,6 +30,10 @@ const rotas = createBrowserRouter([
   {
     path: '/products/:productId',
     element: <Products />
+  },
+  {
+    path: '/checkout',
+    element: <CheckOut />
   }
 ])
 
@@ -37,6 +42,7 @@ const Rotas = () => (
     <Route path="/" element={<Home />} />
     <Route path="/categories" element={<Categories />} />
     <Route path="/products/:productId" element={<Products />} />
+    <Route path="/checkout" element={<CheckOut />} />
   </Routes>
 )
 

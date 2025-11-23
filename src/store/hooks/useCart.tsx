@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux'
 import { RootReducer } from '..'
 import { useDispatch } from 'react-redux'
 import { toggle, add, remove } from '../reducer/cart'
-import { Item } from '../../components/Gallery/styles'
 import { Game } from '../../pages/Home'
 import { useEffect } from 'react'
 

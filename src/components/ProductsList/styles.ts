@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import { Props } from '.'
-import { breakpoint, cores } from '../../styles'
+import { breakpoint, colors } from '../../styles'
 
 export const Container = styled.section<Omit<Props, 'title' | 'games'>>`
   padding: 32px 40px 32px 40px;
   background-color: ${(props) =>
-    props.background === 'black' ? cores.preta : cores.cinza};
+    props.background === 'black' ? colors.black : colors.gray};
 `
 
 export const List = styled.ul`

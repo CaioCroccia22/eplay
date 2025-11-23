@@ -1,5 +1,44 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Game } from '../pages/Home'
+
+type Product = {
+  id: number
+  price: number
+}
+
+type PurchasePayload = {
+  products: Product[]
+  billing: {
+    name: string
+    email: string
+    document: string
+  }
+  delivery: {
+    email: string
+  }
+  payment: {
+    card: {
+      active: boolean
+      owner?: {
+        name: string
+        document: string
+      }
+      name?: string
+      number?: string
+      expires?: {
+        month: number
+        year: number
+      }
+      code?: number
+    }
+    installments: number
+  }
+}
+
+type PurchaseResponse = {
+  orderId: string
+}
+
 // Cobre erro da API quando os itens não tem valor
 const normalizarJogo = (game: Game): Game => ({
   ...game,
@@ -50,6 +89,13 @@ export const api = createApi({
     getGame: builder.query<Game, string>({
       query: (id) => `jogos/${id}`,
       transformResponse: (response: Game) => normalizarJogo(response)
+    }),
+    purchease: builder.mutation<PurchaseResponse, PurchasePayload>({
+      query: (body) => ({
+        url: 'checkout',
+        method: 'POST',
+        body
+      })
     })
   })
 })
@@ -63,6 +109,7 @@ export const {
   useGetFightGameQuery,
   useGetSimulationGameQuery,
   useGetRpgGameQuery,
-  useGetGameQuery
+  useGetGameQuery,
+  usePurcheaseMutation
 } = api
 export default api

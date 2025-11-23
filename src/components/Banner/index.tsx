@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react'
-import { Game } from '../../pages/Home/index'
-import bannerImg from '../../assets/images/Imagem-exercicio.webp'
 import Button from '../Button'
 import Tag from '../Tag/Index'
 import { formataPreco } from '../ProductsList'
@@ -12,11 +9,11 @@ import {
   ContainerInfos,
   ContainerTitle
 } from './styles'
-import { useParams } from 'react-router'
+
 import { useGetFeaturedGameQuery } from '../../services/Api'
 
 const Banner = () => {
-  const { data: game, isLoading } = useGetFeaturedGameQuery()
+  const { data: game } = useGetFeaturedGameQuery()
 
   if (!game) {
     return <h3>Carregando...</h3>

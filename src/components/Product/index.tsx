@@ -1,5 +1,3 @@
-import { format } from 'path'
-import { Game } from '../../pages/Home'
 import Tag from '../Tag/Index'
 import { Card, Titulo, Descricao, Infos, ContainerDescription } from './styles'
 
@@ -21,7 +19,6 @@ const Produto = ({
   description,
   infos,
   image,
-  background,
   id
 }: Props) => {
   const getDescricao = (descricao: string) => {
@@ -33,7 +30,10 @@ const Produto = ({
   }
 
   return (
-    <Card to={`/products/${id}`}>
+    <Card
+      title={`Clique aqui para ver mais detalhes do jogo ${title}`}
+      to={`/products/${id}`}
+    >
       <img src={image} alt={title}></img>
       <Infos>
         {infos.map((info) => (

@@ -1,5 +1,4 @@
 import Button from '../Button'
-import starWars from '../../assets/images/star_wars.png'
 import {
   Overlay,
   SideBar,
@@ -11,7 +10,6 @@ import {
 import Tag from '../Tag/Index'
 import { useCart } from '../../store/hooks/useCart'
 import { formataPreco } from '../ProductsList'
-import { Item } from '../Gallery/styles'
 
 export const Cart = () => {
   const { ToggleCart, RemoveProduct, Items, Sum } = useCart()

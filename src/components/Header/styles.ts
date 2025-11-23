@@ -1,24 +1,31 @@
 import styled from 'styled-components'
-import { breakpoint, cores } from '../../styles'
+import { breakpoint, colors } from '../../styles'
 
 export const Links = styled.ul`
   display: flex;
   margin-left: 40px;
+
+  @media (max-width: ${breakpoint.tablet}) {
+    margin-left: 0;
+    display: block;
+  }
 `
 
 export const HeaderBar = styled.header`
-  background-color: ${cores.cinza};
+  background-color: ${colors.gray};
   padding: 24px;
   border-radius: 16px;
   margin-bottom: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  a {
-    color: ${cores.branca};
+  a,
+  span {
+    color: ${colors.white};
     text-decoration: none;
     font-weight: bold;
+  }
+
+  h1 {
+    line-height: 0;
   }
 `
 
@@ -30,66 +37,67 @@ export const HeaderRow = styled.div`
   > div {
     display: flex;
     align-items: center;
-  }
 
-  @media (max-width: ${breakpoint.tablet}) {
-    max-width: 100%;
-    flex: 1;
-    justify-content: space-between;
+    @media (max-width: ${breakpoint.tablet}) {
+      flex: 1;
+      justify-content: space-between;
 
-    ${Links} {
-      visibility: hidden;
-      opacity: 0;
+      ${Links} {
+        display: none;
+      }
     }
   }
 `
 
 export const NavMobile = styled.nav`
-  visibility: hidden;
-  opacity: 0;
+  display: none;
 
   &.is-open {
     display: block;
-    visibility: visible;
-    opacity: 1;
   }
 `
 
 export const LinkItem = styled.li`
   margin-right: 16px;
-  display: flex;
-  @media (max-width: ${breakpoint.tablet}) {
-    margin-right: 0px;
-  }
-`
-
-export const CartButton = styled.a`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
 
   @media (max-width: ${breakpoint.tablet}) {
-    background-color: red;
-    span {
-      visibility: hidden;
-      opacity: 0;
+    margin-right: 0;
+
+    a {
+      padding: 16px 0;
+      display: block;
+      text-align: center;
     }
   }
 `
+
+export const CartButton = styled.span`
+  display: flex;
+  cursor: pointer;
+
+  img {
+    margin-left: 16px;
+  }
+
+  @media (max-width: ${breakpoint.tablet}) {
+    span {
+      display: none;
+    }
+  }
+`
+
 export const Hamburguer = styled.div`
   width: 32px;
-  margin-right: 10px;
-  cursor: pointer;
+
   span {
     height: 2px;
     display: block;
     width: 100%;
-    background-color: ${cores.branca};
+    background-color: ${colors.white};
     margin-bottom: 4px;
   }
 
-  @media (max-width: ${breakpoint.tablet}) {
-    visibility: hidden;
-    opacity: 0;
+  @media (min-width: ${breakpoint.tablet}) {
+    display: none;
   }
 `

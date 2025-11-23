@@ -1,6 +1,3 @@
-import { useEffect } from 'react'
-import banner from '../../assets/images/hero.jpg'
-import GameClass from '../../models/Game'
 import { Game } from '../../pages/Home'
 import { useCart } from '../../store/hooks/useCart'
 import Button from '../Button'

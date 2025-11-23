@@ -7,7 +7,7 @@ import { useGetGameQuery } from '../../services/Api'
 
 const Products = () => {
   const { productId } = useParams()
-  const { data: game, isError, isLoading } = useGetGameQuery(productId!)
+  const { data: game, isError } = useGetGameQuery(productId!)
 
   if (game === undefined) {
     return <h3>Carregando produto...</h3>

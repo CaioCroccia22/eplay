@@ -1,4 +1,3 @@
-import starWars from '../../assets/images/star_wars.png'
 import Tag from '../Tag/Index'
 
 export const CartProduct = () => (

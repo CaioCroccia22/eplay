@@ -1,10 +1,5 @@
 import { Provider } from 'react-redux'
-import {
-  createBrowserRouter,
-  BrowserRouter,
-  Routes,
-  Route
-} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { GlobalCss } from './styles'
 import Header from './components/Header'
@@ -15,27 +10,6 @@ import Footer from './components/Footer'
 import { store } from './store'
 import Cart from './components/Cart/Index'
 import CheckOut from './pages/CheckOut'
-
-// import Products from './components/Product'
-
-const rotas = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />
-  },
-  {
-    path: '/categories',
-    element: <Categories />
-  },
-  {
-    path: '/products/:productId',
-    element: <Products />
-  },
-  {
-    path: '/checkout',
-    element: <CheckOut />
-  }
-])
 
 const Rotas = () => (
   <Routes>

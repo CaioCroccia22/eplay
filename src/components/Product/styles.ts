@@ -1,20 +1,20 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 import { TagContainer } from '../Tag/styles'
-import { Props } from '.'
 import { Link } from 'react-router'
 
 export const Card = styled(Link)`
-  background-color: ${cores.preta};
+  background-color: ${colors.black};
   border-radius: 8px;
   position: relative;
   width: 222px;
   overflow: hidden;
   text-decoration: none;
-  color: ${cores.branca};
+  color: ${colors.white};
   display: block;
   box-shadow: 4px 4px 0.1px rgba(0, 0, 0, 0.5);
   trasition: all 0.5s ease-in-out;
+  height: 100%;
 
   img {
     height: 250px;

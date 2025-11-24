@@ -1,25 +1,31 @@
 import Button from '../Button'
-import {
-  Overlay,
-  SideBar,
-  CartContainer,
-  CartItem,
-  Prices,
-  Quantity
-} from './styles'
+import * as S from './styles'
 import Tag from '../Tag/Index'
 import { useCart } from '../../store/hooks/useCart'
-import { formataPreco } from '../ProductsList'
+import { parseToBrl } from '../../utils'
+
+import { useNavigate } from 'react-router'
 
 export const Cart = () => {
   const { ToggleCart, RemoveProduct, Items, Sum } = useCart()
+  const navigate = useNavigate()
+  const goToCheckout = () => {
+    if (Items.length > 0) {
+      navigate('/checkout')
+      ToggleCart()
+    } else {
+      navigate('/')
+      ToggleCart()
+      alert('Não existem compras no carrinho')
+    }
+  }
   return (
-    <CartContainer className={useCart().CartState ? 'is-open' : ''}>
-      <Overlay onClick={ToggleCart} />
-      <SideBar>
+    <S.CartContainer className={useCart().CartState ? 'is-open' : ''}>
+      <S.Overlay onClick={ToggleCart} />
+      <S.SideBar>
         {Items.map((i) => (
           <ul key={i.id}>
-            <CartItem>
+            <S.CartItem>
               <img src={i.media.cover} />
               <div>
                 <h3>{i.name}</h3>
@@ -27,23 +33,24 @@ export const Cart = () => {
                 <Tag>{i.details.system}</Tag>
               </div>
               <button type="button" onClick={() => RemoveProduct(i)} />
-            </CartItem>
+            </S.CartItem>
           </ul>
         ))}
-        <Quantity>{Items.length} jogo(s) no carrinho</Quantity>
-        <Prices>
-          Total de {formataPreco(Sum)}
+        <S.Quantity>{Items.length} jogo(s) no carrinho</S.Quantity>
+        <S.Prices>
+          Total de {parseToBrl(Sum)}
           <span>Em até 6x sem juros</span>
-        </Prices>
+        </S.Prices>
         <Button
           variant="primary"
           type="button"
           title="Clique aqui para comprar"
+          onClick={goToCheckout}
         >
           Continuar com a compra
         </Button>
-      </SideBar>
-    </CartContainer>
+      </S.SideBar>
+    </S.CartContainer>
   )
 }
 

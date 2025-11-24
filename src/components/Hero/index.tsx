@@ -1,7 +1,8 @@
 import { Game } from '../../pages/Home'
 import { useCart } from '../../store/hooks/useCart'
+import { parseToBrl } from '../../utils'
 import Button from '../Button'
-import { formataPreco } from '../ProductsList'
+
 import Tag from '../Tag/Index'
 
 import { Banner, Infos } from './styles'
@@ -23,12 +24,12 @@ const Hero = ({ game }: Props) => {
           <h2>{game.name}</h2>
           <p>
             {game.prices.discount ? (
-              <span>{formataPreco(game.prices.old)}</span>
+              <span>{parseToBrl(game.prices.old)}</span>
             ) : (
               <span></span>
             )}
             Por
-            {game.prices.current && <> {formataPreco(game.prices.current)} </>}
+            {game.prices.current && <> {parseToBrl(game.prices.current)} </>}
           </p>
           <Button
             onClick={() => {

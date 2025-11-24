@@ -1,21 +1,18 @@
 import { Game } from '../../pages/Home'
+import { parseToBrl } from '../../utils'
+import Loader from '../Loader/Index'
 import Product from '../Product'
 import { Container, List } from './styles'
 
 export type Props = {
   title: string
   background: 'gray' | 'black'
-  games: Game[]
+  games?: Game[]
   id?: string
+  isLoading?: boolean
 }
 
-export const formataPreco = (preco = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
-}
-const ProductsList = ({ title, background, games, id }: Props) => {
+const ProductsList = ({ title, background, games, id, isLoading }: Props) => {
   // O retorno é um string da NumberFormat
 
   // Preencher a props tags do product
@@ -34,29 +31,33 @@ const ProductsList = ({ title, background, games, id }: Props) => {
     }
 
     if (game.prices.current) {
-      tags.push(formataPreco(game.prices.current))
+      tags.push(parseToBrl(game.prices.current))
     }
 
     return tags
+  }
+  if (isLoading) {
+    return <Loader />
   }
   return (
     <Container id={id} background={background}>
       <h2>{title}</h2>
       <List>
-        {games.map((game) => (
-          <li key={game.id}>
-            <Product
-              id={game.id}
-              title={game.name}
-              category={game.details.category}
-              image={game.media.thumbnail}
-              description={game.description}
-              system={game.details.system}
-              infos={getGameTags(game)}
-              background={background}
-            ></Product>
-          </li>
-        ))}
+        {games &&
+          games.map((game) => (
+            <li key={game.id}>
+              <Product
+                id={game.id}
+                title={game.name}
+                category={game.details.category}
+                image={game.media.thumbnail}
+                description={game.description}
+                system={game.details.system}
+                infos={getGameTags(game)}
+                background={background}
+              ></Product>
+            </li>
+          ))}
       </List>
     </Container>
   )

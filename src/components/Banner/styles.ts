@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { TagContainer } from '../Tag/styles'
 import { breakpoint } from '../../styles'
 
-export const Imagem = styled.div`
+export const Image = styled.div`
   width: 100vw;
   height: 75vh;
   display: block;
@@ -61,11 +61,11 @@ export const ContainerTitle = styled.div`
   margin-left: 150px;
 `
 
-export const Titulo = styled.h2`
+export const Title = styled.h2`
   font-size: 16px;
   max-width: 450px;
 `
-export const Precos = styled.span`
+export const Prices = styled.span`
   font-size: 24px;
   margin-top: 24px;
 

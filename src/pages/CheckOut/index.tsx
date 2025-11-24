@@ -1,15 +1,20 @@
+import { Navigate } from 'react-router'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+
 import { useState } from 'react'
+
 import Button from '../../components/Button'
 import Card from '../../components/Card'
 import { InputGroup, Row, TabButton } from './styles'
-
-import boleto from '../../assets/images/boleto.png'
-import cartao from '../../assets/images/cartao.png'
-import { useFormik } from 'formik'
-import * as yup from 'yup'
+import barCode from '../../assets/images/boleto.png'
+import CreditCard from '../../assets/images/cartao.png'
 import { usePurcheaseMutation } from '../../services/Api'
+import { useCart } from '../../store/hooks/useCart'
+import { parseToBrl } from '../../utils'
 
 const CheckOut = () => {
+  const { Items, Sum } = useCart()
   const [payWithCard, setPayWithCard] = useState(false)
   const [purchase, { data, isSuccess }] = usePurcheaseMutation()
   const form = useFormik({
@@ -97,6 +102,9 @@ const CheckOut = () => {
     }
   })
 
+  if (Items.length === 0) {
+    return <Navigate to="/" />
+  }
   const getErrorMessage = (fieldName: string, message?: string) => {
     // verificar se a propriedade esta no objeto
     const isTouched = fieldName in form.touched
@@ -104,6 +112,14 @@ const CheckOut = () => {
 
     if (isTouched && isInvalid) return message
     return ''
+  }
+
+  const checkInputHasError = (fieldName: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+    const hasError = isTouched && isInvalid
+
+    return hasError
   }
 
   console.log(form)
@@ -158,10 +174,8 @@ const CheckOut = () => {
                     value={form.values.fullName}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('fullName') ? 'error' : ''}
                   ></input>
-                  <small>
-                    {getErrorMessage('fullName', form.errors.fullName)}
-                  </small>
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="email">Email</label>
@@ -172,8 +186,8 @@ const CheckOut = () => {
                     value={form.values.email}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('email') ? 'error' : ''}
                   ></input>
-                  <small>{getErrorMessage('email', form.errors.email)}</small>
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="CPF">CPF</label>
@@ -184,8 +198,8 @@ const CheckOut = () => {
                     value={form.values.cpf}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('cpf') ? 'error' : ''}
                   ></input>
-                  <small>{getErrorMessage('cpf', form.errors.cpf)}</small>
                 </InputGroup>
               </Row>
               <h3 className="margin-top">
@@ -201,13 +215,10 @@ const CheckOut = () => {
                     value={form.values.deliveryEmail}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={
+                      checkInputHasError('deliveryEmail') ? 'error' : ''
+                    }
                   />
-                  <small>
-                    {getErrorMessage(
-                      'deliveryEmail',
-                      form.errors.deliveryEmail
-                    )}
-                  </small>
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="confirmDeliveryEmail">
@@ -220,10 +231,10 @@ const CheckOut = () => {
                     value={form.values.confirmDeliveryEmail}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={
+                      checkInputHasError('confirmDeliveryEmail') ? 'error' : ''
+                    }
                   />
-                  <small>
-                    {getErrorMessage('cpf', form.errors.confirmDeliveryEmail)}
-                  </small>
                 </InputGroup>
               </Row>
             </>
@@ -234,14 +245,14 @@ const CheckOut = () => {
                 onClick={() => setPayWithCard(false)}
                 isActive={!payWithCard}
               >
-                <img src={boleto} alt="Boleto" />
+                <img src={barCode} alt="Boleto" />
                 Boleto Bancário
               </TabButton>
               <TabButton
                 onClick={() => setPayWithCard(true)}
                 isActive={payWithCard}
               >
-                <img src={cartao} alt="Cartão de crédito" />
+                <img src={CreditCard} alt="Cartão de crédito" />
                 Cartão de crédito
               </TabButton>
               <div className="margin-top">
@@ -340,9 +351,9 @@ const CheckOut = () => {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                         >
-                          <option>1x de 200,00</option>
-                          <option>2x de 200,00</option>
-                          <option>3x de 200,00</option>
+                          <option>1x de {parseToBrl(Sum)}</option>
+                          <option>2x de {parseToBrl(Sum / 2)}</option>
+                          <option>3x de {parseToBrl(Sum / 3)}</option>
                         </select>
                       </InputGroup>
                     </Row>

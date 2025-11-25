@@ -1,8 +1,9 @@
 import { Navigate } from 'react-router'
+import InputMask from 'react-input-mask'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Button from '../../components/Button'
 import Card from '../../components/Card'
@@ -12,11 +13,12 @@ import CreditCard from '../../assets/images/cartao.png'
 import { usePurcheaseMutation } from '../../services/Api'
 import { useCart } from '../../store/hooks/useCart'
 import { parseToBrl } from '../../utils'
+import Loader from '../../components/Loader/Index'
 
 const CheckOut = () => {
-  const { Items, Sum } = useCart()
+  const { Items, Sum, ClearCart } = useCart()
   const [payWithCard, setPayWithCard] = useState(false)
-  const [purchase, { data, isSuccess }] = usePurcheaseMutation()
+  const [purchase, { data, isSuccess, isLoading }] = usePurcheaseMutation()
   const form = useFormik({
     initialValues: {
       fullName: '',
@@ -97,21 +99,21 @@ const CheckOut = () => {
             }
           }
         },
-        products: [{ id: 1, price: 10 }]
+        products: Items.map((item) => ({
+          id: item.id,
+          price: item.prices.current
+        }))
       })
     }
   })
+  useEffect(() => {
+    if (isSuccess) {
+      ClearCart()
+    }
+  }, [ClearCart, isSuccess])
 
-  if (Items.length === 0) {
+  if (Items.length === 0 && !isSuccess) {
     return <Navigate to="/" />
-  }
-  const getErrorMessage = (fieldName: string, message?: string) => {
-    // verificar se a propriedade esta no objeto
-    const isTouched = fieldName in form.touched
-    const isInvalid = fieldName in form.errors
-
-    if (isTouched && isInvalid) return message
-    return ''
   }
 
   const checkInputHasError = (fieldName: string) => {
@@ -122,7 +124,10 @@ const CheckOut = () => {
     return hasError
   }
 
-  console.log(form)
+  if (isLoading) {
+    return <Loader></Loader>
+  }
+
   return (
     <div className="Container">
       {isSuccess && data ? (
@@ -191,7 +196,7 @@ const CheckOut = () => {
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="CPF">CPF</label>
-                  <input
+                  <InputMask
                     type="text"
                     id="CPF"
                     name="cpf"
@@ -199,7 +204,8 @@ const CheckOut = () => {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError('cpf') ? 'error' : ''}
-                  ></input>
+                    mask="999.999.999-99"
+                  ></InputMask>
                 </InputGroup>
               </Row>
               <h3 className="margin-top">
@@ -276,12 +282,13 @@ const CheckOut = () => {
                         <label htmlFor="cpfCardOwner">
                           CPF do titular do cartão:{' '}
                         </label>
-                        <input
+                        <InputMask
                           type="text"
                           id="cpfCardOwner"
                           value={form.values.cpfCardOwner}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
+                          mask="999.999.999-99"
                         />
                       </InputGroup>
                     </Row>
@@ -300,44 +307,48 @@ const CheckOut = () => {
                       </InputGroup>
                       <InputGroup>
                         <label htmlFor="cardNumber">Número do cartão: </label>
-                        <input
+                        <InputMask
                           type="text"
                           id="cardNumber"
                           value={form.values.cardNumber}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
+                          mask="9999 9999 9999 9999"
                         />
                       </InputGroup>
                       <InputGroup maxWidth="123px">
                         <label htmlFor="expiresMonth">
                           Mês do vencimento:{' '}
                         </label>
-                        <input
+                        <InputMask
                           type="text"
                           id="expiresMonth"
                           value={form.values.expiresMonth}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
+                          mask="99"
                         />
                       </InputGroup>
                       <InputGroup maxWidth="123px">
                         <label htmlFor="expiresYear">Ano do vencimento: </label>
-                        <input
+                        <InputMask
                           type="text"
                           id="expiresYear"
                           value={form.values.expiresYear}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
+                          mask="9999"
                         />
                       </InputGroup>
                       <InputGroup maxWidth="48px">
                         <label htmlFor="cardCode">CVV: </label>
-                        <input
+                        <InputMask
                           type="text"
                           id="cardCode"
                           value={form.values.cardCode}
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
+                          mask="999"
                         />
                       </InputGroup>
                     </Row>

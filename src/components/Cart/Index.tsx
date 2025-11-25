@@ -36,19 +36,27 @@ export const Cart = () => {
             </S.CartItem>
           </ul>
         ))}
-        <S.Quantity>{Items.length} jogo(s) no carrinho</S.Quantity>
-        <S.Prices>
-          Total de {parseToBrl(Sum)}
-          <span>Em até 6x sem juros</span>
-        </S.Prices>
-        <Button
-          variant="primary"
-          type="button"
-          title="Clique aqui para comprar"
-          onClick={goToCheckout}
-        >
-          Continuar com a compra
-        </Button>
+        {Items.length > 0 ? (
+          <>
+            <S.Quantity>{Items.length} jogo(s) no carrinho</S.Quantity>
+            <S.Prices>
+              Total de {parseToBrl(Sum)}
+              <span>Em até 6x sem juros</span>
+            </S.Prices>
+            <Button
+              variant="primary"
+              type="button"
+              title="Clique aqui para comprar"
+              onClick={goToCheckout}
+            >
+              Continuar com a compra
+            </Button>
+          </>
+        ) : (
+          <p className="empty-text">
+            O carrinho esta vazio adicione o item para realizar a compra
+          </p>
+        )}
       </S.SideBar>
     </S.CartContainer>
   )

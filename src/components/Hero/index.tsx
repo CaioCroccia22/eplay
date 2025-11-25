@@ -1,4 +1,3 @@
-import { Game } from '../../pages/Home'
 import { useCart } from '../../store/hooks/useCart'
 import { parseToBrl } from '../../utils'
 import Button from '../Button'

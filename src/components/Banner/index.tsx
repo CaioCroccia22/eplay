@@ -5,10 +5,9 @@ import * as S from './styles'
 
 import { useGetFeaturedGameQuery } from '../../services/Api'
 import { parseToBrl } from '../../utils'
-import Loader from '../Loader/Index'
 
 const Banner = () => {
-  const { data: game, isLoading } = useGetFeaturedGameQuery()
+  const { data: game } = useGetFeaturedGameQuery()
 
   return (
     <>

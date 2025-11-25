@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux'
 import { RootReducer } from '..'
 import { useDispatch } from 'react-redux'
-import { toggle, add, remove } from '../reducer/cart'
-import { Game } from '../../pages/Home'
+import { toggle, add, remove, clear } from '../reducer/cart'
 import { useEffect } from 'react'
 
 export function useCart() {
@@ -31,5 +30,15 @@ export function useCart() {
     console.log(Items)
   }
 
-  return { CartState, Items, ToggleCart, AddProduct, RemoveProduct, Sum }
+  const ClearCart = () => dispatch(clear())
+
+  return {
+    CartState,
+    Items,
+    ToggleCart,
+    AddProduct,
+    RemoveProduct,
+    ClearCart,
+    Sum
+  }
 }

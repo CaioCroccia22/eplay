@@ -6,7 +6,6 @@ import fechar from '../../assets/images/close 1.png'
 
 import { Action, Item, Items, Modal, ModalContent } from './styles'
 import { useState } from 'react'
-import { GalleryItem } from '../../pages/Home'
 
 type Props = {
   defaultCover: string
